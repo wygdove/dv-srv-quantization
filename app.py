@@ -1,7 +1,20 @@
+# coding=utf-8
+__author__='wygdove'
+__time__='2020/1/5 22:39'
+
+
 from flask import Flask,request
+import config
+from modules import account
+
+
 
 appname="dv-src-quantization"
 app=Flask(appname)
+app.config.from_object(config.DevConfig)
+
+
+
 
 
 @app.route('/')
@@ -15,5 +28,25 @@ def test():
     return param
 
 
+# app.add_url_rule("/account/getUserAccount","/account/getUserAccount",account.getUserAccount)
+@app.route("/account/getUserAccount",methods=['POST'])
+def test():
+    param=request.form['param']
+    return account.getUserAccount()
+
+
+
+
+
+
+
+
+
+
+
 if __name__=='__main__':
-    app.run('127.0.0.1',8010,True)
+    host='127.0.0.1'
+    # host='0.0.0.0'
+    port=8010
+    debugMode=True
+    app.run(host,port,debugMode)
