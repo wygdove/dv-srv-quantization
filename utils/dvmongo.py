@@ -58,8 +58,24 @@ def findById(coll,id):
 def insert(coll,data):
     return coll.insert(data)
 
+
+
+def update(coll,query,data):
+    return coll.update(query,{"$set":data})
+
+def updateById(coll,id,data):
+    return coll.update({"_id":ObjectId(id)},{"$set":data})
+
+def updateOne(coll,query,data):
+    return coll.update_one(query,{"$set":data})
+
+def updateOneById(coll,id,data):
+    return coll.update_one({"_id":ObjectId(id)},{"$set":data})
+
+
+
 def delete_many(coll,query):
-    coll.delete_many(query)
+    return coll.delete_many(query)
 
 
 
