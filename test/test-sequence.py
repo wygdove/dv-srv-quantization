@@ -14,6 +14,12 @@ def getNextId():
     seqName="Transaction"
     dvtest.tprint(dvseq.getNextId(seqName))
 
+def getNextCode():
+    seqName="UserAccount"
+    # seqName="Transaction"
+    dvtest.tprint(dvseq.getNextCode(seqName,"UA",5))
+
 
 if __name__ == '__main__':
-    getNextId()
+    # getNextId()
+    getNextCode()

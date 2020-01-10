@@ -5,7 +5,6 @@ __time__='2020/1/10 13:35'
 
 from config import config
 from utils import dvmongo
-from utils import dvtest
 
 
 bucket_flag="Sequence"
@@ -28,7 +27,6 @@ def getNextId(seqName):
     seqName=sequences[seqName]
     query={"sequenceName":seqName}
     res=dvmongo.find(coll,query)
-    print res
     if res==None or len(res)==0:
         seqdata={
             "sequenceName":seqName,
@@ -47,15 +45,16 @@ def getNextId(seqName):
         dvmongo.updateOneById(coll,mongoid,seqdata)
     else:
         nextid=0
-
     return nextid
 
 
-def getNextCode(seqName,len):
-    coll=init()
-    query={}
-    res=dvmongo.find(coll,query)
-    return res
+def getNextCode(seqName,prefix,length):
+    nextcode=prefix
+    tempcode=str(getNextId(seqName))
+    for i in xrange(0,length-len(tempcode)):
+        nextcode+="0"
+    nextcode+=tempcode
+    return nextcode
 
 
 
