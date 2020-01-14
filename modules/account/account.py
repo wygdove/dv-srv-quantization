@@ -4,7 +4,7 @@ __time__='2020/1/6 15:29'
 
 
 from config import config
-from utils import dvdate,dvmongo,dvajax,dvseq,dvuser
+from utils import dvcomn,dvdate,dvmongo,dvajax,dvseq,dvuser
 
 
 
@@ -34,14 +34,15 @@ def saveUserAccount(userAccount):
         "currency":""
     }
     '''
-    if userAccount.has_key("accountCode"):
+    if dvcomn.hasKeyStr(userAccount,"accountCode"):
         query={"accountCode":userAccount["accountCode"]}
     else:
-        query={"accountCode":None}
+        query=None
         userAccount["accountCode"]=dvseq.getNextCode(module_flag,"UA",6)
         userAccount["createUser"]=dvuser.getCurrentUser()
         userAccount["createTime"]=dvdate.getNow()
     userAccount["updateUser"]=dvuser.getCurrentUser()
     userAccount["updateTime"]=dvdate.getNow()
-    dvmongo.save(coll,query,userAccount)
+    res=dvmongo.save(coll,query,userAccount)
+    return dvajax.success(res)
 

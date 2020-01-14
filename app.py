@@ -6,6 +6,7 @@ __time__='2020/1/5 22:39'
 from flask import Flask,request
 import config
 from modules import account
+from utils import dvuser
 
 
 
@@ -28,13 +29,22 @@ def test():
     return param
 
 
+
+
+
+
 # app.add_url_rule("/account/getUserAccount","/account/getUserAccount",account.getUserAccount)
 @app.route("/account/getUserAccount",methods=['POST'])
-def test():
-    param=request.form['param']
+# @app.route("/account/getUserAccount")
+def getUserAccount():
+    param=request.json
+    param["createUser"]=dvuser.getCurrentUser()
     return account.getUserAccount()
 
-
+@app.route("/account/saveUserAccount",methods=['POST'])
+def saveUserAccount():
+    param=request.json
+    return account.saveUserAccount(param)
 
 
 

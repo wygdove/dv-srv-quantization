@@ -75,7 +75,8 @@ def updateOneById(coll,id,data):
 
 def save(coll,query,data):
     result=0
-    res=find(coll,query)
+    if query==None: res=None
+    else: res=find(coll,query)
     if res==None or len(res)==0:
         insert(coll,data)
         result=1
