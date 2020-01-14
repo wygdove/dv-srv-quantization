@@ -73,6 +73,25 @@ def updateOneById(coll,id,data):
     return coll.update_one({"_id":ObjectId(id)},{"$set":data})
 
 
+def save(coll,query,data):
+    result=0
+    res=find(coll,query)
+    if res==None or len(res)==0:
+        insert(coll,data)
+        result=1
+    elif len(res)==1:
+        resdata=res[0]
+        mongoid=resdata["_id"]["$oid"]
+        del resdata["_id"]
+        resdata.update(data)
+        updateOneById(coll,mongoid,resdata)
+        result=1
+    else:
+        result=len(res)
+    return result
+
+
+
 
 def delete_many(coll,query):
     return coll.delete_many(query)
