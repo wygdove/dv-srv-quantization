@@ -4,9 +4,7 @@ __time__='2020/1/10 13:56'
 
 
 from utils import dvtest
-from utils import dvseq
-
-
+from component import dvseq
 
 
 def getNextId():

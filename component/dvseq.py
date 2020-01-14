@@ -4,8 +4,7 @@ __time__='2020/1/10 13:35'
 
 
 from config import config
-from utils import dvmongo
-
+from component import dvmongo
 
 bucket_flag="Sequence"
 sequences={

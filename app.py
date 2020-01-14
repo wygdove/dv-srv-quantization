@@ -5,10 +5,8 @@ __time__='2020/1/5 22:39'
 
 from flask import Flask,request
 import config
+from component import dvuser
 from modules import account
-from utils import dvuser
-
-
 
 appname="dv-src-quantization"
 app=Flask(appname)

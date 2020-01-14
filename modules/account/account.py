@@ -4,10 +4,8 @@ __time__='2020/1/6 15:29'
 
 
 from config import config
-from utils import dvcomn,dvdate,dvmongo,dvajax,dvseq,dvuser
-
-
-
+from utils import dvcomn,dvdate,dvajax
+from component import dvuser,dvmongo,dvseq
 
 module_flag="UserAccount"
 
