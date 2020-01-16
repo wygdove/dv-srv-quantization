@@ -44,3 +44,15 @@ def saveUserAccount(userAccount):
     res=dvmongo.save(coll,query,userAccount)
     return dvajax.success(res)
 
+def deleteUserAccount(userAccount):
+    coll=init()
+    res=-1
+    # print userAccount
+    # print userAccount["accountCode"]
+    # print dvcomn.hasKeyStr(userAccount,"accountCode")
+    if dvcomn.hasKeyStr(userAccount,"accountCode"):
+        res=dvmongo.deleteOneByCode(coll,{"accountCode":userAccount["accountCode"]})
+    else: return dvajax.norequest()
+    if res==1: return dvajax.success(res)
+    else: return dvajax.error('删除失败',res)
+

@@ -72,6 +72,9 @@ def updateOne(coll,query,data):
 def updateOneById(coll,id,data):
     return coll.update_one({"_id":ObjectId(id)},{"$set":data})
 
+def delete_many(coll,query):
+    return coll.delete_many(query)
+
 
 def save(coll,query,data):
     result=0
@@ -92,10 +95,26 @@ def save(coll,query,data):
     return result
 
 
-
-
-def delete_many(coll,query):
+def delete(coll,query):
     return coll.delete_many(query)
+
+def deleteById(coll,id):
+    return coll.delete_many({"_id":ObjectId(id)})
+
+def deleteOneByCode(coll,query):
+    result=0
+    if query==None: res=None
+    else: res=find(coll,query)
+    if res==None or len(res)==0:
+        result=0
+    elif len(res)==1:
+        coll.delete_many(query)
+        result=1
+    else:
+        result=len(res)
+    return result
+
+
 
 
 

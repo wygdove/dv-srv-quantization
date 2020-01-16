@@ -44,6 +44,11 @@ def saveUserAccount():
     param=request.json
     return account.saveUserAccount(param)
 
+@app.route("/account/deleteUserAccount",methods=['POST'])
+def deleteUserAccount():
+    param=request.json
+    return account.deleteUserAccount(param)
+
 
 
 

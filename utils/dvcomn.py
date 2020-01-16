@@ -11,7 +11,7 @@ def isNotNull(obj):
     return not isNull(obj)
 
 def isNullStr(str):
-    return str==None or type(str)!=type("") or str==""
+    return str==None or (type(str)!=type("") and type(str)!=type('') and type(str)!=type(u'')) or str=="" or str=='' or str==u''
 
 def isNotNullStr(str):
     return not isNullStr(str)
