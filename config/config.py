@@ -13,11 +13,17 @@ class Config(object):
     }
     MONGODB_BUCKETS={
         "Sequence":"Sequence",
-        "UserAccount":"UserAccount"
+        "UserAccount":"UserAccount",
+        "AssetRecord":"AssetRecord",
+        "Transaction":"Transaction"
     }
 
+
+
 class ProdConfig(Config):
-    pass
+    DEBUG=False
+
 
 class DevConfig(Config):
     DEBUG=True
+

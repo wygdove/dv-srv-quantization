@@ -6,7 +6,10 @@ __time__='2020/1/5 22:39'
 from flask import Flask,request
 import config
 from component import dvuser
-from modules import account
+
+from modules import *
+
+
 
 appname="dv-src-quantization"
 app=Flask(appname)
@@ -37,17 +40,17 @@ def test():
 def getUserAccount():
     param=request.json
     param["createUser"]=dvuser.getCurrentUser()
-    return account.getUserAccount()
+    return UserAccount.getUserAccount()
 
 @app.route("/account/saveUserAccount",methods=['POST'])
 def saveUserAccount():
     param=request.json
-    return account.saveUserAccount(param)
+    return UserAccount.saveUserAccount(param)
 
 @app.route("/account/deleteUserAccount",methods=['POST'])
 def deleteUserAccount():
     param=request.json
-    return account.deleteUserAccount(param)
+    return UserAccount.deleteUserAccount(param)
 
 
 

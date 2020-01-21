@@ -6,10 +6,12 @@ __time__='2020/1/10 13:35'
 from config import config
 from component import dvmongo
 
+
 bucket_flag="Sequence"
 sequences={
-    "UserAccount":"SeqUserAccount", # 账户
-    "Transaction":"SeqTransaction", # 交易
+    "UserAccount":"SeqUserAccount",  # 账户
+    "AssetRecord":"SeqAssetRecord",  # 资产记录
+    "Transaction":"SeqTransaction",  # 交易
     "":"",
 }
 
