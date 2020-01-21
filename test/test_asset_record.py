@@ -5,28 +5,32 @@ __time__='2020/1/22 01:22'
 
 
 from utils import dvtest
-from modules import account
+from modules import AssetRecord
 
 
 
 if __name__=='__main__':
     assetRecord={
-        "accountName":"货基",
-        "isIntoSummary":"1",
-        "currency":"CNY"
+        "recordDate":"2019-08-22 13:30:57",
+        "recordInOut":"1000",
+        "recordHolding":"0",
+        "accountCode":"UA000031",
     }
-    account.saveAssetRecord(assetRecord)
+    # AssetRecord.saveAssetRecord(assetRecord)
 
 
     assetRecord={
-        "accountCode":"UA000024",
-        "accountName":"货基222",
-        "isIntoSummary":"1",
-        "currency":"CNY"
+        "recordCode":"AR000000000002",
+        "recordDate":"2019-08-22 13:30:57",
+        "recordInOut":"10000000",
+        "recordHolding":"0",
+        "accountCode":"UA000031",
     }
-    # account.saveAssetRecord(assetRecord)
+    # AssetRecord.saveAssetRecord(assetRecord)
+
+    # AssetRecord.deleteAssetRecord({"recordCode":"AR000000000001"})
 
 
-    res=account.getAssetRecord()
+    res=AssetRecord.getAssetRecords()
     dvtest.tprint(res)
 

@@ -7,7 +7,21 @@ from config import config
 from utils import dvcomn,dvdate,dvajax
 from component import dvuser,dvmongo,dvseq
 
+
 module_flag="AssetRecord"
+module_prefix="AR"
+key="recordCode"
+code_length=12
+'''
+assetRecord={
+    "recordCode":"",
+    "recordDate":"",
+    "recordInOut":"",
+    "recordHolding":"",
+    "accountCode":"",
+}
+'''
+
 
 
 def init():
@@ -25,18 +39,11 @@ def getAssetRecords():
 
 def saveAssetRecord(assetRecord):
     coll=init()
-    '''
-    assetRecord={
-        "isIntoSummary":"",
-        "currency":"",
-        "accountCode":"",
-    }
-    '''
-    if dvcomn.hasKeyStr(assetRecord,"accountCode"):
-        query={"accountCode":assetRecord["accountCode"]}
+    if dvcomn.hasKeyStr(assetRecord,key):
+        query={key:assetRecord[key]}
     else:
         query=None
-        assetRecord["accountCode"]=dvseq.getNextCode(module_flag,"UA",6)
+        assetRecord[key]=dvseq.getNextCode(module_flag,module_prefix,code_length)
         assetRecord["createUser"]=dvuser.getCurrentUser()
         assetRecord["createTime"]=dvdate.getNow()
     assetRecord["updateUser"]=dvuser.getCurrentUser()
@@ -47,11 +54,8 @@ def saveAssetRecord(assetRecord):
 def deleteAssetRecord(assetRecord):
     coll=init()
     res=-1
-    # print assetRecord
-    # print assetRecord["accountCode"]
-    # print dvcomn.hasKeyStr(assetRecord,"accountCode")
-    if dvcomn.hasKeyStr(assetRecord,"accountCode"):
-        res=dvmongo.deleteOneByCode(coll,{"accountCode":assetRecord["accountCode"]})
+    if dvcomn.hasKeyStr(assetRecord,key):
+        res=dvmongo.deleteOneByCode(coll,{key:assetRecord[key]})
     else: return dvajax.norequest()
     if res==1: return dvajax.success(res)
     else: return dvajax.error('删除失败',res)
