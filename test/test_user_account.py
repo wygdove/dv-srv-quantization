@@ -4,7 +4,7 @@ __time__='2020/1/10 10:34'
 
 
 from utils import dvtest
-from modules import account
+from modules import UserAccount
 
 
 
@@ -14,7 +14,7 @@ if __name__=='__main__':
         "isIntoSummary":"1",
         "currency":"CNY"
     }
-    # account.saveUserAccount(userAccount)
+    # UserAccount.saveUserAccount(userAccount)
 
 
     userAccount={
@@ -23,10 +23,10 @@ if __name__=='__main__':
         "isIntoSummary":"1",
         "currency":"CNY"
     }
-    # account.saveUserAccount(userAccount)
+    # UserAccount.saveUserAccount(userAccount)
 
 
-    res=account.getUserAccount()
+    res=UserAccount.getUserAccount()
     dvtest.tprint(res)
 
 
