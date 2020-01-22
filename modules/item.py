@@ -18,7 +18,7 @@ def init(itemConfig):
     return coll
 
 
-def getItems(itemConfig):
+def getItems(itemConfig,itemData):
     coll=init(itemConfig)
     query={}
     res=dvmongo.find(coll,query)

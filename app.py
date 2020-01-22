@@ -8,6 +8,7 @@ import config
 from component import dvuser
 
 from modules import *
+from modules import item
 
 
 
@@ -53,6 +54,22 @@ def deleteUserAccount():
     return UserAccount.deleteUserAccount(param)
 
 
+
+@app.route("/common/getItem",methods=['POST'])
+def getItem():
+    param=request.json
+    param["itemData"]["createUser"]=dvuser.getCurrentUser()
+    return item.getItems(param["itemConfig"],param["itemData"])
+
+@app.route("/common/saveItem",methods=['POST'])
+def saveItem():
+    param=request.json
+    return item.saveItem(param["itemConfig"],param["itemData"])
+
+@app.route("/common/deleteItem",methods=['POST'])
+def deleteItem():
+    param=request.json
+    return item.deleteItem(param["itemConfig"],param["itemData"])
 
 
 
