@@ -7,7 +7,6 @@ from flask import Flask,request
 import config
 from component import dvuser
 
-from modules import *
 from modules import item
 
 
@@ -35,26 +34,6 @@ def test():
 
 
 
-# app.add_url_rule("/account/getUserAccount","/account/getUserAccount",account.getUserAccount)
-@app.route("/account/getUserAccount",methods=['POST'])
-# @app.route("/account/getUserAccount")
-def getUserAccount():
-    param=request.json
-    param["createUser"]=dvuser.getCurrentUser()
-    return UserAccount.getUserAccount()
-
-@app.route("/account/saveUserAccount",methods=['POST'])
-def saveUserAccount():
-    param=request.json
-    return UserAccount.saveUserAccount(param)
-
-@app.route("/account/deleteUserAccount",methods=['POST'])
-def deleteUserAccount():
-    param=request.json
-    return UserAccount.deleteUserAccount(param)
-
-
-
 @app.route("/common/getItem",methods=['POST'])
 def getItem():
     param=request.json
@@ -70,6 +49,7 @@ def saveItem():
 def deleteItem():
     param=request.json
     return item.deleteItem(param["itemConfig"],param["itemData"])
+
 
 
 
