@@ -12,7 +12,7 @@ from modules import item
 if __name__=='__main__':
     itemConfig={
         "moduleFlag":"InvestClass",
-        "codeKey":"InvestClassIdCode",
+        "codeKey":"investClassIdCode",
         "codePrefix":"IC",
         "codeLength":6,
     }
@@ -20,25 +20,25 @@ if __name__=='__main__':
 
     itemData={
         # "investClassIdCode":"",
-        "investClassCode":"IndiceFund",
-        "investClassName":"指数基金",
+        "investClassCode":"Money",
+        "investClassName":"现金",
     }
     # item.saveItem(itemConfig,itemData)
 
     # item.deleteItem(itemConfig,{itemConfig["codeKey"]:"IC000007"})
 
-
     itemDatas=[
+        {"investClassCode":"Money","investClassName":"现金"},
         {"investClassCode":"IndiceFund","investClassName":"指数基金"},
         {"investClassCode":"ConvertibleBond","investClassName":"可转债"},
         {"investClassCode":"Stock","investClassName":"股票"},
         {"investClassCode":"StockFund","investClassName":"股票基金"},
         {"investClassCode":"Bond","investClassName":"债券"},
         {"investClassCode":"MoneyFund","investClassName":"货币基金"},
-        {"investClassCode":"FinancialProduct","investClassName":"理财产品"}
+        {"investClassCode":"FinancialProduct","investClassName":"理财产品"},
     ]
-    # for id in itemDatas:
-    #     item.saveItem(itemConfig,id)
+    for id in itemDatas:
+        item.saveItem(itemConfig,id)
 
 
     res=item.getItems(itemConfig,itemData)
