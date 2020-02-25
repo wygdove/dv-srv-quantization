@@ -9,9 +9,12 @@ from component import dvmongo
 
 bucket_flag="Sequence"
 sequences={
+    "ItemTest":"SeqItemTest",        # 测试
     "UserAccount":"SeqUserAccount",  # 账户
     "AssetRecord":"SeqAssetRecord",  # 资产记录
     "Transaction":"SeqTransaction",  # 交易
+    "InvestClass":"SeqInvestClass",  # 投资类别
+    "Investment":"SeqInvestment",    # 投资标的
     "":"",
 }
 
@@ -58,4 +61,13 @@ def getNextCode(seqName,prefix,length):
     return nextcode
 
 
+
+
+def deleteSequence(seqName):
+    coll=init()
+    seqName=sequences[seqName]
+    query={"sequenceName":seqName}
+    res=dvmongo.find(coll,query)
+    dvmongo.deleteById(coll,res[0]['_id']['$oid'])
+    return dvmongo.find(coll,query)
 

@@ -9,13 +9,16 @@ class Config(object):
         "mongoServer":"127.0.0.1:37017",
         "database":"quantization",
         "userName":"quantization",
-        "password":"okmPL<"
+        "password":""
     }
     MONGODB_BUCKETS={
         "Sequence":"Sequence",
+        "ItemTest":"ItemTest",
         "UserAccount":"UserAccount",
         "AssetRecord":"AssetRecord",
-        "Transaction":"Transaction"
+        "Transaction":"Transaction",
+        "InvestClass":"InvestClass",
+        "Investment":"Investment",
     }
 
 

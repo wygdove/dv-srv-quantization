@@ -13,11 +13,17 @@ def getNextId():
     dvtest.tprint(dvseq.getNextId(seqName))
 
 def getNextCode():
-    seqName="UserAccount"
+    seqName="InvestClass"
     # seqName="Transaction"
     dvtest.tprint(dvseq.getNextCode(seqName,"UA",5))
 
 
+def deleteSequence():
+    seqName="InvestClass"
+    dvtest.tprint(dvseq.deleteSequence(seqName))
+
+
 if __name__ == '__main__':
     # getNextId()
-    getNextCode()
+    # getNextCode()
+    deleteSequence()
