@@ -9,6 +9,7 @@ from component import dvuser
 
 from modules import item as Item
 from modules import Transaction
+from modules import CheckDb
 
 
 
@@ -50,6 +51,12 @@ def saveItem():
 def deleteItem():
     param=request.json
     return Item.deleteItem(param["itemConfig"],param["itemData"])
+
+
+
+@app.route("/setting/checkdb",methods=['POST','GET'])
+def checkdb():
+    return CheckDb.getCurrentDb()
 
 
 
