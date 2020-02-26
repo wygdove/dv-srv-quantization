@@ -38,7 +38,7 @@ def getNextId(seqName):
             "increaseBy":1,
             "lastNumber":1
         }
-        print dvmongo.insert(coll,seqdata)
+        # print dvmongo.insert(coll,seqdata)
         nextid=1
     elif len(res)==1:
         seqdata=res[0]
