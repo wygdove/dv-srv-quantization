@@ -7,19 +7,19 @@ from utils import dvtest
 from component import dvseq
 
 
+
+# seqName="UserAccount"
+seqName="Transaction"
+
+
 def getNextId():
-    seqName="UserAccount"
-    seqName="Transaction"
     dvtest.tprint(dvseq.getNextId(seqName))
 
 def getNextCode():
-    seqName="InvestClass"
-    # seqName="Transaction"
     dvtest.tprint(dvseq.getNextCode(seqName,"UA",5))
 
 
 def deleteSequence():
-    seqName="InvestClass"
     dvtest.tprint(dvseq.deleteSequence(seqName))
 
 
