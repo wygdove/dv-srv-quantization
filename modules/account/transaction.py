@@ -17,43 +17,9 @@ def init():
     return coll
 
 
-def getTransactions():
+def getHoldingInvestment():
     coll=init()
-    query={}
-    res=dvmongo.find(coll,query)
+    field="investmentCode"
+    query={"investmentHolding":{"$ne":0}}
+    res=dvmongo.distinct(coll,field,query)
     return dvajax.success(res)
-
-
-def saveTransaction(transaction):
-    coll=init()
-    '''
-    transaction={
-        "isIntoSummary":"",
-        "currency":"",
-        "accountCode":"",
-    }
-    '''
-    if dvcomn.hasKeyStr(transaction,"accountCode"):
-        query={"accountCode":transaction["accountCode"]}
-    else:
-        query=None
-        transaction["accountCode"]=dvseq.getNextCode(module_flag,"UA",6)
-        transaction["createUser"]=dvuser.getCurrentUser()
-        transaction["createTime"]=dvdate.getNow()
-    transaction["updateUser"]=dvuser.getCurrentUser()
-    transaction["updateTime"]=dvdate.getNow()
-    res=dvmongo.save(coll,query,transaction)
-    return dvajax.success(res)
-
-def deleteTransaction(transaction):
-    coll=init()
-    res=-1
-    # print transaction
-    # print transaction["accountCode"]
-    # print dvcomn.hasKeyStr(transaction,"accountCode")
-    if dvcomn.hasKeyStr(transaction,"accountCode"):
-        res=dvmongo.deleteOneByCode(coll,{"accountCode":transaction["accountCode"]})
-    else: return dvajax.norequest()
-    if res==1: return dvajax.success(res)
-    else: return dvajax.error('删除失败',res)
-

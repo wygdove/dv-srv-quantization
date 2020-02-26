@@ -32,6 +32,68 @@ def getFullname(coll):
 
 
 
+def insert(coll,data):
+    return coll.insert(data)
+
+def update(coll,query,data):
+    return coll.update(query,{"$set":data})
+
+def updateById(coll,id,data):
+    return coll.update({"_id":ObjectId(id)},{"$set":data})
+
+def updateOne(coll,query,data):
+    return coll.update_one(query,{"$set":data})
+
+def updateOneById(coll,id,data):
+    return coll.update_one({"_id":ObjectId(id)},{"$set":data})
+
+def delete_many(coll,query):
+    return coll.delete_many(query)
+
+
+
+def save(coll,query,data):
+    result=0
+    if query==None: res=None
+    else: res=find(coll,query)
+    if res==None or len(res)==0:
+        insert(coll,data)
+        result=1
+    elif len(res)==1:
+        resdata=res[0]
+        mongoid=resdata["_id"]["$oid"]
+        del resdata["_id"]
+        resdata.update(data)
+        updateOneById(coll,mongoid,resdata)
+        result=1
+    else:
+        result=len(res)
+    return result
+
+def delete(coll,query):
+    return coll.delete_many(query)
+
+def deleteById(coll,id):
+    return coll.delete_many({"_id":ObjectId(id)})
+
+def deleteOneByCode(coll,query):
+    result=0
+    if query==None: res=None
+    else: res=find(coll,query)
+    if res==None or len(res)==0:
+        result=0
+    elif len(res)==1:
+        coll.delete_many(query)
+        result=1
+    else:
+        result=len(res)
+    return result
+
+
+
+
+
+
 def find(coll,query):
     return findMany(coll,query)
 
@@ -54,67 +116,9 @@ def findById(coll,id):
     return data
 
 
-
-def insert(coll,data):
-    return coll.insert(data)
-
-
-
-def update(coll,query,data):
-    return coll.update(query,{"$set":data})
-
-def updateById(coll,id,data):
-    return coll.update({"_id":ObjectId(id)},{"$set":data})
-
-def updateOne(coll,query,data):
-    return coll.update_one(query,{"$set":data})
-
-def updateOneById(coll,id,data):
-    return coll.update_one({"_id":ObjectId(id)},{"$set":data})
-
-def delete_many(coll,query):
-    return coll.delete_many(query)
-
-
-def save(coll,query,data):
-    result=0
-    if query==None: res=None
-    else: res=find(coll,query)
-    if res==None or len(res)==0:
-        insert(coll,data)
-        result=1
-    elif len(res)==1:
-        resdata=res[0]
-        mongoid=resdata["_id"]["$oid"]
-        del resdata["_id"]
-        resdata.update(data)
-        updateOneById(coll,mongoid,resdata)
-        result=1
-    else:
-        result=len(res)
-    return result
-
-
-def delete(coll,query):
-    return coll.delete_many(query)
-
-def deleteById(coll,id):
-    return coll.delete_many({"_id":ObjectId(id)})
-
-def deleteOneByCode(coll,query):
-    result=0
-    if query==None: res=None
-    else: res=find(coll,query)
-    if res==None or len(res)==0:
-        result=0
-    elif len(res)==1:
-        coll.delete_many(query)
-        result=1
-    else:
-        result=len(res)
-    return result
-
-
+def distinct(coll,field,query):
+    data=coll.distinct(field,query)
+    return data
 
 
 
