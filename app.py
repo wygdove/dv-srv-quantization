@@ -7,7 +7,8 @@ from flask import Flask,request
 import config
 from component import dvuser
 
-from modules import item
+from modules import item as Item
+from modules import Transaction
 
 
 
@@ -38,17 +39,27 @@ def test():
 def getItem():
     param=request.json
     param["itemData"]["createUser"]=dvuser.getCurrentUser()
-    return item.getItems(param["itemConfig"],param["itemData"])
+    return Item.getItems(param["itemConfig"],param["itemData"])
 
 @app.route("/common/saveItem",methods=['POST'])
 def saveItem():
     param=request.json
-    return item.saveItem(param["itemConfig"],param["itemData"])
+    return Item.saveItem(param["itemConfig"],param["itemData"])
 
 @app.route("/common/deleteItem",methods=['POST'])
 def deleteItem():
     param=request.json
-    return item.deleteItem(param["itemConfig"],param["itemData"])
+    return Item.deleteItem(param["itemConfig"],param["itemData"])
+
+
+
+@app.route("/transaction/getHoldingInvestment",methods=['POST'])
+def getHoldingInvestment():
+    param=request.json
+    currentUser=dvuser.getCurrentUser()
+    return Transaction.getHoldingInvestment()
+
+
 
 
 
