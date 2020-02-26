@@ -7,7 +7,7 @@ __time__='2020/1/6 14:49'
 class Config(object):
     MONGODB_CONF={
         "mongoServer":"127.0.0.1:37017",
-        "database":"quantization",
+        "database":"quantizationdev",
         "userName":"quantization",
         "password":""
     }
