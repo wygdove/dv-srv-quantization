@@ -58,6 +58,11 @@ def deleteItem():
 def checkdb():
     return CheckDb.getCurrentDb()
 
+@app.route("/setting/switchdb",methods=['POST','GET'])
+def switchdb():
+    param=request.json
+    return CheckDb.switchDb(param["flag"])
+
 
 
 @app.route("/transaction/getHoldingInvestment",methods=['POST'])

@@ -23,3 +23,10 @@ def getCurrentDb():
     return dvajax.success(fullname)
 
 
+def switchDb(flag):
+    dbnames={"dev":"quantizationdev","pro":"quantization"}
+    dbname=dbnames[flag]
+    config.Config.MONGODB_CONF["database"]=dbname
+    return dvajax.success(dbname)
+
+
