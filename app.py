@@ -17,6 +17,11 @@ appname="dv-src-quantization"
 app=Flask(appname)
 app.config.from_object(config.DevConfig)
 
+class ll:  # log level
+    debug=False
+    info=True
+    error=True
+    temp=True
 
 
 
@@ -40,17 +45,26 @@ def test():
 def getItem():
     param=request.json
     param["itemData"]["createUser"]=dvuser.getCurrentUser()
-    return Item.getItems(param["itemConfig"],param["itemData"])
+    if ll.info: print param
+    result=Item.getItems(param["itemConfig"],param["itemData"])
+    if ll.info: print result
+    return result
 
 @app.route("/common/saveItem",methods=['POST'])
 def saveItem():
     param=request.json
-    return Item.saveItem(param["itemConfig"],param["itemData"])
+    if ll.info: print param
+    result=Item.saveItem(param["itemConfig"],param["itemData"])
+    if ll.info: print result
+    return result
 
 @app.route("/common/deleteItem",methods=['POST'])
 def deleteItem():
     param=request.json
-    return Item.deleteItem(param["itemConfig"],param["itemData"])
+    if ll.info: print param
+    result=Item.deleteItem(param["itemConfig"],param["itemData"])
+    if ll.info: print result
+    return result
 
 
 
@@ -69,7 +83,10 @@ def switchdb():
 def getHoldingInvestment():
     param=request.json
     currentUser=dvuser.getCurrentUser()
-    return Transaction.getHoldingInvestment()
+    if ll.info: print param
+    result=Transaction.getHoldingInvestment()
+    if ll.info: print result
+    return result
 
 
 
