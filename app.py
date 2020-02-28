@@ -44,7 +44,7 @@ def test():
 @app.route("/common/getItem",methods=['POST'])
 def getItem():
     param=request.json
-    param["itemData"]["createUser"]=dvuser.getCurrentUser()
+    # param["itemData"]["createUser"]=dvuser.getCurrentUser()
     if ll.info: print param
     result=Item.getItems(param["itemConfig"],param["itemData"])
     if ll.info: print result

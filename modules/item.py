@@ -20,8 +20,14 @@ def init(itemConfig):
 
 def getItems(itemConfig,itemData):
     coll=init(itemConfig)
-    query={}
-    res=dvmongo.find(coll,query)
+    query=itemData
+    res=""
+    if itemConfig.has_key("sortField") and not dvcomn.isNullStr(itemConfig["sortField"]):
+        sortField=itemConfig["sortField"]
+        sortType=itemConfig["sortType"] if itemConfig.has_key("sortType") else ''
+        res=dvmongo.findSort(coll,query,sortField,sortType)
+    else:
+        res=dvmongo.find(coll,query)
     return dvajax.success(res)
 
 

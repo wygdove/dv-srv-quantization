@@ -94,26 +94,35 @@ def deleteOneByCode(coll,query):
 
 
 
+def loadData(data):
+    # return json.dumps(data)
+    return json.loads(dumps(data))
+
+
 def find(coll,query):
     return findMany(coll,query)
 
-def findOne(coll,query):
-    data=coll.find_one(query)
-    data=json.loads(dumps(data))
-    # return json.dumps(data)
-    return data
-
 def findMany(coll,query):
     data=coll.find(query)
-    data=json.loads(dumps(data))
-    # return json.dumps(data)
-    return data
+    return loadData(data)
+
+def findOne(coll,query):
+    data=coll.find_one(query)
+    return loadData(data)
 
 def findById(coll,id):
     data=coll.find({"_id":ObjectId(id)})
     data=json.loads(dumps(data))
-    # return json.dumps(data)
-    return data
+    return loadData(data)
+
+
+def findSort(coll,query,sortField,sortType):
+    return findManySort(coll,query,sortField,sortType)
+
+def findManySort(coll,query,sortField,sortType):
+    sortType=pymongo.DESCENDING if 'desc'==sortType else pymongo.ASCENDING
+    data=coll.find(query).sort(sortField,sortType)
+    return loadData(data)
 
 
 def distinct(coll,field,query):
