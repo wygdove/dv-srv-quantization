@@ -20,6 +20,15 @@ class Config(object):
         "InvestClass":"InvestClass",
         "Investment":"Investment",
     }
+    SEQUENCES={
+        "ItemTest":"SeqItemTest",  # 测试
+        "UserAccount":"SeqUserAccount",  # 账户
+        "AssetRecord":"SeqAssetRecord",  # 资产记录
+        "Transaction":"SeqTransaction",  # 交易
+        "InvestClass":"SeqInvestClass",  # 投资类别
+        "Investment":"SeqInvestment",  # 投资标的
+        "":"",
+    }
 
 
 
